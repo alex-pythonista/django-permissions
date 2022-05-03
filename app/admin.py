@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import Brand, Outlet, Menu, Items
 
-# Register your models here.
+
+admin.site.register(Brand)
+admin.site.register(Outlet)
+admin.site.register(Menu)
+admin.site.register(Items)
