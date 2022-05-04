@@ -7,7 +7,7 @@ User = get_user_model()
 
 class Brand(models.Model):
     name = models.CharField(max_length=150)
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='owner')
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     manager = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='manager')
 
     def __str__(self):

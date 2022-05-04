@@ -29,13 +29,13 @@
                 </ul>
                 <a class="btn btn-success btn-sm" href="#" role="button">Add</a>
               </td>
-              <td><a class="btn btn-primary" href="#" role="button">Edit</a></td>
-              <td><a class="btn btn-danger" href="#" role="button">Delete</a></td>
+              <td><a class="btn btn-primary" href="{% url 'edit_brand' pk=brand.id %}" role="button">Edit</a></td>
+              <td><a class="btn btn-danger" href="{% url 'delete_brand' pk=brand.id %}" role="button">Delete</a></td>
             </tr>
             {% endfor %}
           </tbody>
-          <a class="btn btn-success" href="#" role="button">Add</a> | 
-          <a class="btn btn-secondary" href="{% url 'logout' %}" role="button">Logout</a>
+          <a class="btn btn-success" href="{% url 'add_brand' %}" role="button">Add</a> | 
+          <a class="btn btn-secondary" href="{% url 'logout' %}" role="button">{{request.user.first_name}}-Logout</a>
         </table>
   </div>
 {% endblock %}

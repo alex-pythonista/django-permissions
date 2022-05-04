@@ -8,4 +8,4 @@ class BrandForm(ModelForm):
 
     class Meta:
         model = Brand
-        fields = "__all__"
+        fields = ['name', 'manager']
