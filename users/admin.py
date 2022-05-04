@@ -8,11 +8,11 @@ User = get_user_model()
 class UserAdminConfig(UserAdmin):
     model = User
     search_fields = ('email', 'first_name', 'last_name')
-    list_filter = ('email', 'first_name', 'last_name', 'is_active', 'is_staff')
+    list_filter = ('email', 'user_type', 'is_active', 'is_staff')
     ordering = ('-first_name',)
-    list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_staff')
+    list_display = ('email', 'user_type', 'is_active', 'is_staff')
     fieldsets = (
-        (None, {'fields': ('email', 'first_name', 'last_name',)}),
+        (None, {'fields': ('email', 'user_type', 'password', 'first_name', 'last_name')}),
         ('Permissions', 
         {
             'fields': (
@@ -29,7 +29,7 @@ class UserAdminConfig(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2', 'is_active', 'is_staff')}
+            'fields': ('email', 'user_type', 'password1', 'password2', 'is_active', 'is_staff')}
          ),
     )
 

@@ -25,14 +25,21 @@ class CustomUserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **other_fields)
         user.set_password(password)
+        user.is_active = True
         user.save()
         return user
 
 
 class User(AbstractBaseUser, PermissionsMixin):
     
+    USER_TYPE_CHOICES = (
+        (1, 'AC_Owner'),
+        (2, 'Manager'),
+        (3, 'Staff'),
+        (4, 'Customer'),
+    )
     email = models.EmailField(unique=True)
-    # username = models.CharField(max_length=150, unique=True)
+    user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True, blank=True)
     first_name = models.CharField(max_length=150, blank=True, null=True)
     last_name = models.CharField(max_length=150, blank=True, null=True)
     is_staff = models.BooleanField(default=False)
