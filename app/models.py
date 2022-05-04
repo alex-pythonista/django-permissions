@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+# from users.models import Owner
 
 User = get_user_model()
 
 
 class Brand(models.Model):
     name = models.CharField(max_length=150)
-    manager = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='owner')
+    manager = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='manager')
 
     def __str__(self):
         return self.name
@@ -14,12 +16,12 @@ class Brand(models.Model):
 
 class Outlet(models.Model):
     name = models.CharField(max_length=150)
-    menu = models.ForeignKey("Menu", on_delete=models.SET_NULL, null=True)
+    menu = models.ForeignKey("Menu", on_delete=models.SET_NULL, null=True, blank=True)
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, blank=True, null=True)
     staff = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.brand.name} - {self.name}'
+        return f'{self.name} | {self.brand.name} '
 
 
 class Items(models.Model):

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title_block %} Brand {% endblock %}
+{% block body_block %}
+<center><h1>Brand Page</h1><br>
+  <h3>List of Brands</h3></center>
+  <div class="col-sm-6 mx-auto m-2">
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Brand name</th>
+              <th scope="col">Manager</th>
+              <th scope="col"><a link="#">Outlets</a></th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for brand in brands %}
+            <tr>
+              <th scope="row">1</th>
+              <td>{{brand.name}}</td>
+              <td>{{brand.manager.first_name}}</td>
+              <td>
+                <ul>
+                  {% for outlet in brand.outlet_set.all %}
+                  <li><a href="#">{{outlet}}</a></li>
+                  {% endfor %}
+                </ul>
+                <a class="btn btn-success btn-sm" href="#" role="button">Add</a>
+              </td>
+              <td><a class="btn btn-primary" href="#" role="button">Edit</a></td>
+              <td><a class="btn btn-danger" href="#" role="button">Delete</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          <a class="btn btn-success" href="#" role="button">Add</a> | 
+          <a class="btn btn-secondary" href="{% url 'logout' %}" role="button">Logout</a>
+        </table>
+  </div>
+{% endblock %}
