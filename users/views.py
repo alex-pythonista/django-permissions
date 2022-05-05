@@ -1,7 +1,10 @@
+import django
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import get_user_model, login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from app.models import Brand
 
 User = get_user_model()
 
@@ -25,7 +28,8 @@ def login_page(request):
         # Brand Manager
         elif user.user_type == 2:
             login(request, user)
-            return redirect('home')
+            brand = Brand.objects.get(manager=user)
+            return HttpResponseRedirect(reverse('brand_detail', kwargs={'pk': brand.pk}))
 
         # staff user
         elif user.user_type == 3:

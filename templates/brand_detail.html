@@ -1,32 +1,27 @@
 {% extends 'base.html' %}
-{% block title_block %} Brands {% endblock %}
+{% block title_block %} {{brand.name}} {% endblock %}
 {% block body_block %}
-<center><h1>Brand Page</h1><br>
-  <h3>List of Brands</h3></center>
+<center><h1>{{brand.name}}</h1><br>
+  <h3>List of Outlets</h3></center>
   <div class="col-sm-6 mx-auto m-2">
       <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Brand name</th>
-              <th scope="col">Manager</th>
-              <th scope="col"><a link="#">Outlets</a></th>
+              <th scope="col">Outlet name</th>
+              <th scope="col">Staff</th>
+              <th scope="col"><a link="#">Menus</a></th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
-            {% for brand in brands %}
+            {% for outlet in outlets %}
             <tr>
-              <th scope="row">1</th>
-              <td><a href="{% url 'brand_detail' pk=brand.id %}">{{brand.name}}</a></td>
-              <td>{{brand.manager.first_name}}</td>
-              <td>
-                <ul>
-                  {% for outlet in brand.outlet_set.all %}
-                  <li><a href="#">{{outlet}}</a></li>
-                  {% endfor %}
-                </ul>
+              <th scope="row">#</th>
+              <td>{{outlet.name}}</td>
+              <td>{{outlet.staff.first_name}}</td>
+              <td>{{outlet.menu.name}}
                 <a class="btn btn-success btn-sm" href="#" role="button">Add</a>
               </td>
               <td><a class="btn btn-primary" href="{% url 'edit_brand' pk=brand.id %}" role="button">Edit</a></td>
@@ -35,6 +30,7 @@
             {% endfor %}
           </tbody>
           <a class="btn btn-success" href="{% url 'add_brand' %}" role="button">Add</a> | 
+          <a class="btn btn-info" href="{% url 'brands' %}" role="button">Back</a> | 
           <a class="btn btn-secondary" href="{% url 'logout' %}" role="button">{{request.user.first_name}}-Logout</a>
         </table>
   </div>

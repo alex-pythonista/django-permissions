@@ -10,8 +10,8 @@ User = get_user_model()
 def brand_list(request):
     
     brands = Brand.objects.filter(owner=request.user)
-    outlets = Outlet.objects.all()
-    context = {'brands': brands, 'outlets': outlets}
+    # outlets = Outlet.objects.all()
+    context = {'brands': brands,}
 
     return render(request, 'brand_page.html', context)
 
@@ -55,3 +55,13 @@ def delete_brand(request, pk):
         return redirect('brands')
     context = {'item': brand}
     return render(request, 'delete.html', context)
+
+@login_required
+def brand_detail_view(request, pk):
+
+    brand = Brand.objects.get(pk=pk)
+    outlets = Outlet.objects.filter(brand=brand)
+    # menus = Menu.objects.all()
+    context = {'brand': brand, 'outlets': outlets,}
+
+    return render(request, 'brand_detail.html', context)
